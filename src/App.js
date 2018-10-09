@@ -8,7 +8,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      quote:  []
+      quote:  [],
+      isLoaded:false
     };
   };
 
@@ -20,7 +21,8 @@ class App extends Component {
       .then(data  => {
         // Une fois les données récupérées, on va mettre à jour notre state avec les nouvelles données
         this.setState({
-          quote:  data[0].quote,
+          quote:  data[0],
+          isLoaded:true
           
         });
     });
@@ -31,7 +33,7 @@ class App extends Component {
     return (
       <div className="App">
         <GenerateQuote  selectQuote={() =>  this.getQuote()} />
-<DisplayQuote  quote={this.state.quote}  />
+<DisplayQuote  quote={this.state.quote} isLoaded={this.state.isLoaded} />
       </div>
     );
   }
